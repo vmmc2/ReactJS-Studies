@@ -13,3 +13,6 @@
 * You create React.js projects locally in your own machine.
 * This requires the installation of tools and also the creation of files inside your machine.
 * However, you can use any editor of your choice along with any settings and extensions that you might like to use. Therefore, you have more freedom over how you develop your projects.
+* Locally creating and running a React.js project:
+    * To create such project, run the following command inside the folder you want to create your project: ```npx create-react-app react-app-name```
+    * To run such project, run the following command inside the app folder: ```npm start```
