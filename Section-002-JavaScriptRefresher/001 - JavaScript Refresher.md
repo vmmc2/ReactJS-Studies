@@ -136,7 +136,46 @@ console.log(lastName); // "Costa"
 * __Moreover, you must name your variables inside the left-side object using the same names used in the key-value pairs present in the right-side object. Otherwise, the variable inside your left-side object will receive the ```undefined``` value.__
 
 ## Spread Operator
+* The symbol for the Spread Operator is ```...```
+* Such operator is used to pull out values (in the case of JS Arrays) or key-value pairs (in the case of JS Objects).
+* Such operator is commonly used when creating new JS Arrays or new JS Objects.
+* Below, you can find an example using the Spread Operator:
+```js
+const evenNumbers = [2,4,6,8,10];
+const oddNumbers = [1,3,5,7,9];
+const zero = 0;
+
+const numbersFromZeroToTen = [0, ...oddNumbers, ...evenNumbers]; // [0,1,3,5,7,9,2,4,6,8,10];
+```
 
 ## Types of For Loops in JavaScript
+* JavaScript provides us with a few ways of writing For Loops.
+* Here are the most important ones (the ones that we'll use the most):
 
-## Defining Functions inside Functions 
+### ```for``` statement
+* This type of for loop is the most common and simple one. It's also the most similar to the ones we're used to coming from languages such a C, C++ or Java:
+```js
+for(initialization; stopCondition; afterThought){
+  // statements...
+}
+```
+
+### ```for ... in``` statement
+* __This type of for loop acts in the following way: It iterates a specified variable over all the enumerable properties (the property names!!!!) of an object, and for each distinct property, this for loop will execute the statements present inside it.__
+```js
+for(variable in object){
+  // statements...
+}
+```
+
+### ```for ... of``` statement
+* __This type of for loop acts in the following way: It iterates a specified variables over all values of each distinct property of an iterable object (Array, Map, Set, Arguments).__
+```js
+for(variable of object){
+  // statements...
+}
+```
+* __IMPORTANT: Pay attention to the fact the ```for ... in``` focuses on the properties of an object while the ```for ... of``` focuses on the values of an object.__
+
+## Defining Functions inside Functions
+* JavaScript, as Python, allows us to define functions inside functions. However, a nested function can only be called inside the nesting function (as expected).
