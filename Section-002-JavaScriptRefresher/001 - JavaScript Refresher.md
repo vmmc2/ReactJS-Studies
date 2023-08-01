@@ -104,4 +104,39 @@ objectName = {
 * ```undefined```: Default value of a variable, if no value was assigned to it.
 * ```null```: Explicitly assigned by the developer. Usually works as a reset value.
 
-### Usually, when writing JavaScript code, it's a best practice to use camelCase to define the name of the variables.
+### Usually, when writing JavaScript code, it's a best practice to use camelCase to define the name of the variables
+
+## Destructuring
+* This is a JavaScript feature that allows us to destructure both JavaScript Arrays and Objects in a way that we can assign their values to new variables with more ease.
+
+### Destructuring Arrays
+* __First of all, we'll focus on destructuring JS Arrays:__ The destructuring happens in an ordered manner. This means that it follows an approach by using the indexes of the array:
+```js
+const [firstName, lastName] = ["Victor", "Costa"];
+
+console.log(firstName); // "Victor"
+console.log(lastName); // "Costa"
+```
+* __The values inside the right-side array are assigned to the variables inside the left-side array in a 1:1 manner.__
+* __If there are more variables in the left-side array than values inside the right-side array, the remaining/unused variables will be assigned the ```undefined``` value.__
+* __Moreover, you can name your variables inside the left-side array any way you want.__
+
+### Destructuring Objects
+* __First of all, we'll focus on destructuring JS Objects:__ The destructuring happens in an key-value pair manner. This means that it follows an approach by using the key-value pairs that are present inside the JS Object:
+```js
+const {firstName, lastName} = {
+  firstName: "Victor",
+  lastName: "Costa"
+};
+
+console.log(firstName); // "Victor"
+console.log(lastName); // "Costa"
+```
+* __The values inside the right-side array are assigned to the variables inside the left-side array in a 1:1 manner.__
+* __Moreover, you must name your variables inside the left-side object using the same names used in the key-value pairs present in the right-side object. Otherwise, the variable inside your left-side object will receive the ```undefined``` value.__
+
+## Spread Operator
+
+## Types of For Loops in JavaScript
+
+## Defining Functions inside Functions 
