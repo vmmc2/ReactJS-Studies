@@ -99,12 +99,14 @@ objectName = {
 */
 ```
 
+
 ## Variables
 ### Null and Undefined values
 * ```undefined```: Default value of a variable, if no value was assigned to it.
 * ```null```: Explicitly assigned by the developer. Usually works as a reset value.
 
 ### Usually, when writing JavaScript code, it's a best practice to use camelCase to define the name of the variables
+
 
 ## Destructuring
 * This is a JavaScript feature that allows us to destructure both JavaScript Arrays and Objects in a way that we can assign their values to new variables with more ease.
@@ -135,6 +137,7 @@ console.log(lastName); // "Costa"
 * __The values inside the right-side array are assigned to the variables inside the left-side array in a 1:1 manner.__
 * __Moreover, you must name your variables inside the left-side object using the same names used in the key-value pairs present in the right-side object. Otherwise, the variable inside your left-side object will receive the ```undefined``` value.__
 
+
 ## Spread Operator
 * The symbol for the Spread Operator is ```...```
 * Such operator is used to pull out values (in the case of JS Arrays) or key-value pairs (in the case of JS Objects).
@@ -147,6 +150,7 @@ const zero = 0;
 
 const numbersFromZeroToTen = [0, ...oddNumbers, ...evenNumbers]; // [0,1,3,5,7,9,2,4,6,8,10];
 ```
+
 
 ## Types of For Loops in JavaScript
 * JavaScript provides us with a few ways of writing For Loops.
@@ -176,6 +180,7 @@ for(variable of object){
 }
 ```
 * __IMPORTANT: Pay attention to the fact the ```for ... in``` focuses on the properties of an object while the ```for ... of``` focuses on the values of an object.__
+
 
 ## Defining Functions inside Functions
 * JavaScript, as Python, allows us to define functions inside functions. However, a nested function can only be called inside the nesting function (as expected).
