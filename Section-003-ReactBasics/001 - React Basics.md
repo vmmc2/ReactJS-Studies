@@ -43,3 +43,9 @@
 * __Some important details that everyone should know:__
     * The npm packages ```react``` and ```react-dom``` together form the React library. They are separate entities because they have different responsabilities.
     * __A more detailed walkthrough about the structure of a React standard/default project can be found inside the files of the folder ```Section-003-Project```.__
+
+## JSX
+* It's a language whose syntax is very similar to that of HTML.
+* This language is commonly used inside React projects.
+* Indeed, JSX stands for __JavaScript XML.__
+* Moreover, this JSX code is not the code that the browser reads. This is merely a syntatic sugar that allow us, developers, to write code with more ease. In fact, this code will be transformed to JS code that is "understandable" by every browser.
