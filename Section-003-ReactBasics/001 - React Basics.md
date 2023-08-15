@@ -49,3 +49,16 @@
 * This language is commonly used inside React projects.
 * Indeed, JSX stands for __JavaScript XML.__
 * Moreover, this JSX code is not the code that the browser reads. This is merely a syntatic sugar that allow us, developers, to write code with more ease. In fact, this code will be transformed to JS code that is "understandable" by every browser.
+
+## How React Works
+* Basically, in React, we work with components. Talking in a more specific way, components are just custom HTML elements.
+* __A component in React is just a JavaScript function.__
+
+## React Components
+* __Basically, the best practice when implementing React components is to implement one component per file. In other words, 1 file = 1 component.__
+* __Another common best practice is to create a ```components``` folder inside the ```src``` folder. There, all files that implement components will be stored with the exception of the file ```App.js``` file.__
+* __This ```App.js``` file implements the ```App``` component and is considered a special component (root component) since the rendering of every other React component will start from it.__
+* When creating new custom React components, the best way to name them is by using this special CamelCase convention.
+* To use your custom React components, remember to export/import them correctly inside your project.
+* __You can use your custom React elements by simply writing them as HTML elements.__
+* __IMPORTANT: React uses the following rule to differentiate a custom React HTML-ish element from a default HTML element: If the first letter of the element name is upper-case, then it's a custom React HTML-ish element. Otherwise, it's a default one.__
