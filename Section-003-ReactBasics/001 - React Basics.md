@@ -62,3 +62,15 @@
 * To use your custom React components, remember to export/import them correctly inside your project.
 * __You can use your custom React elements by simply writing them as HTML elements.__
 * __IMPORTANT: React uses the following rule to differentiate a custom React HTML-ish element from a default HTML element: If the first letter of the element name is upper-case, then it's a custom React HTML-ish element. Otherwise, it's a default one.__
+
+## More Complex JSX Code
+* __One important thing to keep in mind when writing React components is that when writing the function related to that component the return statement must contain only one single "root" element. If you try to write more than one side by side, it will throw an error. However, this doesn't prevent us from writing several HTML (or custom React) elements inside the "root" element.__
+* __TLDR: JSX expressions must contain only one parent element.__
+
+## Styling React Components
+* As we've previously done with Vanilla JavaScript, to style React components, we'll use CSS.
+* For this purpose, in this course, we'll write our own ```.css``` files.
+* __IMPORTANT: It's considered a best practice to put the ```.css``` file (the style of the React component) and the ```.js``` file (the React component itself) side-by-side inside the same folder.__
+* You'll also need to import the ```.css``` inside the ```.js``` file. This will tell the React build process that we want to apply the styles defined inside the ```.css``` file to the React component inside the ```.js``` file.
+* __After doing so, you will be able to use the CSS classes (or any other CSS selector) defined inside the ```.css``` file without getting any errors. However, you will not use the attribute ```class``` to do so. Instead, you will use an attribute called ```className```.__
+* __If you want to learn more about CSS, take a look at the Google WebDev CSS Course.__
