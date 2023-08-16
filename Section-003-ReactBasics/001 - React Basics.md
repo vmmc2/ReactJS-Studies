@@ -163,5 +163,25 @@ export default ExpenseItem;
 * __It's considered a best practice to separate the "normal" logic JS code from the JSX code inside a React component. In other words, we shouldn't put complex expressions inside the ```{}``` of a JSX code snippet.__
 
 
+## Splitting Components into Multiple Components
+* There is no hard rule that tells us when we need to breakdown a React component into smaller React components.
+* Basically, one could say that when the React component starts getting too big, then it's time for dividing it into smaller components.
+* In the example project of this section, the instructor recomends that we split the ```ExpenseItem``` component into two components: A ```ExpenseItem``` components with less code and a brand new ```ExpenseDate``` component.
+
+
+## The Concept of Composition ("Children Props")
+* Composition is an approach of building user interfaces that uses "building blocks" in order to create a complex UI.
+* A very important concept that one almost always will need to apply is the one of __wrapper components + "children" props.__
+
+
 ## A Closer Look at JSX
-* 
+* As we've already discussed, JSX is basically just syntatic sugar.
+* This means that, behind the scenes, several transformations are performed over this JSX code. This is done in order to make the code viable to be executed inside different versions of different web browsers.
+* One thing that is important to be mentioned is that in the React project of this section, we have 2 React packages imported (```react``` and ```react-dom```). However, we are just importing the ```react-dom``` one inside the ```index.js``` file. So you might be wondering "where does the ```react``` package gets imported?" The answer to this question is: In previous versions of React, whenever we used JSX syntax inside a ```.js``` file, we needed to import this ```react``` package. We had to do this because this package is the one responsible for applying transformations to the JSX syntatic sugar so it can be understood by different versions of different browsers. Such transformations will result in code that uses the ```React.createElement``` method a lot.
+* __However, current versions of React automatically apply this transformation during the building process of the application. Therefore, we don't need to explicitly import this package inside our project. It's enough to have it installed inside it.__
+
+
+## Organizing Component Files
+* At the end of the day, the organization of React component files can be done in very different ways. It all depends on the members of a team.
+* However, we can all agree that it's not a good idea to store dozens, hundreds or thousands of React component files inside a unique ```components``` folder.
+* One could argue that we can separate our component files inside subfolders that are related to the specific functionality of the component. For example, we might have general purpose components that are used accross our project in different pages (thus, we could put all of them inside a ```UI``` subfolder). On the other hand, we might have other components whose purpose is related to expenses (therefore, it might be a good idea to put all of them inside a ```Expenses``` subfolder).
