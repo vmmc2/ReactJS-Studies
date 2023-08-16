@@ -50,9 +50,11 @@
 * Indeed, JSX stands for __JavaScript XML.__
 * Moreover, this JSX code is not the code that the browser reads. This is merely a syntatic sugar that allow us, developers, to write code with more ease. In fact, this code will be transformed to JS code that is "understandable" by every browser.
 
+
 ## How React Works
 * Basically, in React, we work with components. Talking in a more specific way, components are just custom HTML elements.
 * __A component in React is just a JavaScript function.__
+
 
 ## React Components
 * __Basically, the best practice when implementing React components is to implement one component per file. In other words, 1 file = 1 component.__
@@ -63,9 +65,11 @@
 * __You can use your custom React elements by simply writing them as HTML elements.__
 * __IMPORTANT: React uses the following rule to differentiate a custom React HTML-ish element from a default HTML element: If the first letter of the element name is upper-case, then it's a custom React HTML-ish element. Otherwise, it's a default one.__
 
+
 ## More Complex JSX Code
 * __One important thing to keep in mind when writing React components is that when writing the function related to that component the return statement must contain only one single "root" element. If you try to write more than one side by side, it will throw an error. However, this doesn't prevent us from writing several HTML (or custom React) elements inside the "root" element.__
 * __TLDR: JSX expressions must contain only one parent element.__
+
 
 ## Styling React Components
 * As we've previously done with Vanilla JavaScript, to style React components, we'll use CSS.
@@ -74,3 +78,90 @@
 * You'll also need to import the ```.css``` inside the ```.js``` file. This will tell the React build process that we want to apply the styles defined inside the ```.css``` file to the React component inside the ```.js``` file.
 * __After doing so, you will be able to use the CSS classes (or any other CSS selector) defined inside the ```.css``` file without getting any errors. However, you will not use the attribute ```class``` to do so. Instead, you will use an attribute called ```className```.__
 * __If you want to learn more about CSS, take a look at the Google WebDev CSS Course.__
+
+
+## Dynamic Content in JSX
+* As you might have already guessed, in JSX we won't always work with hardcoded values. In fact, this is the exception.
+* Thus, we need a way of outputting dynamic content (maybe data sent by an user) in JSX.
+* Remember that a React component is just a JavaScript function. Thus, we can use "normal" JS code when writing our components.
+* __To output dynamic content in JSX, all we need to do is put a JS expression inside ```{}``` and the result of such expression will be evaluated. For example, if we put ```{1 + 1}``` we would get the value ```2``` as the output.__
+* Take a look at the JS code snippet below that shows how this works:
+```js
+import "./ExpenseItem.css";
+
+function ExpenseItem(){
+    const expenseData = new Date(2021, 2, 28);
+    const expenseTitle = "Car Insurance";
+    const expensePrice = 294.67;
+
+    return (
+        <div className="expense-item">
+            <div> {expenseData.toISOString()} </div>
+            <div className="expense-item__description">
+                <h2> {expenseTitle} </h2>
+                <div className="expense-item__price"> ${expensePrice} </div>
+            </div>
+        </div>
+    );
+}
+
+export default ExpenseItem;
+```
+
+
+## Passing Data and Props
+* Right now, our custom React components are not reusable. I mean, nothing is stopping us from spamming several ```<ExpenseItem></ExpenseItem>``` elements inside the ```App.js``` file.
+* But remember, a React component is just a JavaScript function. We can obtain more flexibility and reusability by passing parameters to the React component (JavaScript function).
+* __On top of that, we'll need to use a React concept called Props.__
+* __Props are just the "attributes" of your custom "HTML element" (React components).__ Props simply means properties. They will work as the properties of our React components.
+* __By using the props concept, the data will not be stored inside the React component. Instead, the React component will receive such data from the outside. One could also say that props allows us to pass data from one component to another.__
+* In order to be able to correctly use props inside our components, we have to make some changes to our current files. Let's see which changes are those:
+    * File #1 - ```App.js```:
+    ```js
+    import ExpenseItem from "./components/ExpenseItem";
+
+    function App() {
+    const expenses = [
+        {id: "e1", title: "Toilet Paper", price: 2.99, date: new Date(2021, 2, 3)},
+        {id: "e2", title: "New TV", price: 299.99, date: new Date(2021, 2, 4)},
+        {id: "e3", title: "Car Insurance", price: 956.83, date: new Date(2021, 2, 5)},
+        {id: "e4", title: "New Copic Marker Set", price: 99.99, date: new Date(2021, 2, 6)}
+    ];
+
+    return (
+        <div>
+        <h2>Let's get started!</h2>
+        <ExpenseItem title={expenses[0].title} price={expenses[0].price} date={expenses[0].date}></ExpenseItem>
+        <ExpenseItem title={expenses[1].title} price={expenses[1].price} date={expenses[1].date}></ExpenseItem>
+        <ExpenseItem title={expenses[2].title} price={expenses[2].price} date={expenses[2].date}></ExpenseItem>
+        <ExpenseItem title={expenses[3].title} price={expenses[3].price} date={expenses[3].date}></ExpenseItem>
+        </div>
+    );
+    }
+
+    export default App;
+    ```
+    * File #2 - ```ExpenseItem.js```:
+    ```js
+    function ExpenseItem(props){
+        return (
+            <div className="expense-item">
+                <div> {props.date.toISOString()} </div>
+                <div className="expense-item__description">
+                    <h2> {props.title} </h2>
+                    <div className="expense-item__price"> ${props.price} </div>
+                </div>
+            </div>
+        );
+    }
+    ```
+* Basically, as we can see above, we can pass different values to a React component by using a key-value approach, in which the keys are "attributes" and the values are the "values" related to the said attributes. All of these key-value pairs are put inside a JS object, which is passed as a parameter to the React component (JavaScript function). By convention, such parameter is named __```props```.__
+* Props can handle not only dynamic data but also hardcoded data.
+
+
+## Separating Logic from JSX
+* __It's considered a best practice to separate the "normal" logic JS code from the JSX code inside a React component. In other words, we shouldn't put complex expressions inside the ```{}``` of a JSX code snippet.__
+
+
+## A Closer Look at JSX
+* 
