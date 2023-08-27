@@ -74,3 +74,80 @@ function ExpenseItem(props){
 * __In React, the idea of state is pretty simple tho: You register state by using the ```useState``` function. Such function will return an array with two elements (the value itself and the updating function). You call the updating function whenever the state should change and you use the first element wherever you want to use its value (in JSX code, for example). React will then do the rest.__
 * __Whenever the state changes, React will re-execute the component function and re-evaluate the JSX code returned by it, so its content can be rendered in the screen.__
 * __State and Events is what add reactivity to our React applications.__
+
+
+## State can be updated in many ways
+* Up to now, we've only seen a single way of updating state. That is: through user actions (a button click, for example).
+* However, there are other ways of updating state in React. For example, we can update a state upon a HTTP request (i.e., the state changes based on the HTTP response that was received). Another example is, we can update a state because a timer (set with ```setTimeout``` function) expired.
+
+
+## Reacting to user input
+* Right now, we have an ```ExpenseForm``` component. Such component is responsible for gathering the information that was being given by the user by using a ```<form></form>``` HTML element.
+* We have also seen that such form has 3 different inputs. One related to the title, another one related to the price and, finally, a last one related to the date.
+* __For the input related to the title, we want to make the web application react to every change (keystroke) that happens when the user is typing something inside such field. To do that, we can use the ```onChange``` attribute of the ```<input></input>``` HTML element. The value of this attribute would be a JS function that receives as its unique argument an event related to such attribute. By inspecting such event, we can find important information about this element, including its current value.__
+
+
+## Side Note (VERY IMPORTANT)
+* __Whenever we need to store a value that must "survive" different React component calls (function calls), we can use the concept of State.__
+* __By doing this, we'll be storing a value inside a variable that is dettached from the life-cycle of the component function. In other words, even if the component function is called multiple times in the future, this value related to the variable won't be lost.__
+
+
+## Multiple States
+* In React, it's possible (and quite common) to have and manage multiple states per component.
+* __To do so, all you need to do is use the ```useState``` function provided by React to store different states into different variables that are dettached from the life-cycle of the component function.__
+* One must keep in mind that such multiple states will be handling different things inside the same component in an independent way.
+* __Such possibility also raises the following question: "When should we use a single state approach vs. a multiple state approach?__
+
+
+## Multiple-State vs. Single-State
+* Basically, it depends on the preference of the developer. 
+* __Both ways of managing the state of a React component are considered to be fine.__
+* However, according to the instructor, __Multiple-State approach is usually more common in React projects.__
+* __This tends to happen, because when you are dealing with a Single-State approach, you must make sure that only certain parts of data are being updated while the others remain the same (To do that, we usually use a JS object to represent the state, and use the ```...``` spread operator along with overwriting to make sure that the data is saved in a consistent way).__
+* The code snippet below shows how this can be done:
+```js
+import React, { useState } from "react";
+
+function someComponent(){
+    //...
+    const [userInput, setUserInput] = useState({
+        enteredTitle: "",
+        enteredAmount: "",
+        enteredDate: ""
+    });
+
+    function titleChangeHandler(event){
+        setUserInput({
+            ...userInput,
+            title: event.target.value // Overwriting the value associated with the "enteredTitle" key.
+        });
+    }
+}
+```
+
+
+## Updating state that depends on the previous state
+* In React, whenever we need to update state that depends on the previous state, we should use a different approach from the one that we showed above.
+* __Instead of passing a value to the function responsible for updating the state, we will pass an anonymous function to it. Such anonymous function will receive only one parameter, which is the previous state (this is automatically handled by React), and it will return the new state.__
+* The code snippet below shows how this can be done:
+```js
+import React, { useState } from "react";
+
+function someComponent(){
+    //...
+    const [userInput, setUserInput] = useState({
+        enteredTitle: "",
+        enteredAmount: "",
+        enteredDate: ""
+    });
+
+    function titleChangeHandler(event){
+        setUserInput((prevState) => {
+            return {
+                ...prevState,
+                enteredTitle: event.target.value // Overwriting the value associated with the "enteredTitle" key.
+            };
+        });
+    }
+}
+```

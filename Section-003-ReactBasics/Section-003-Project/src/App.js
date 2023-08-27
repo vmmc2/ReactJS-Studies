@@ -2,7 +2,8 @@
 This function here is a React component.
 It basically returns a special syntax called JSX that works very similar to HTML.
 */
-import Expenses from "./components/Expenses";
+import Expenses from "./components/Expenses/Expenses";
+import NewExpense from "./components/NewExpense/NewExpense";
 
 function App() {
   const expenses = [
@@ -14,7 +15,7 @@ function App() {
 
   return (
     <div>
-      <h2>Let's get started!</h2>
+      <NewExpense />
       <Expenses expenses={expenses}></Expenses>
     </div>
   );
