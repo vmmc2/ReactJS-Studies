@@ -151,3 +151,27 @@ function someComponent(){
     }
 }
 ```
+
+
+## Creating a shared handler function
+* Up to now, in our project we've created separate handler functions, each one of them for a specific user input (enteredTitle, enteredAmount, enteredData).
+* __However, we can also alternatively create a single shared handler function that will be responsible for dealing with the three different types of user input at once. The code snippet below shows how this can be done:__
+```js
+// Code shown below is stored inside a React Component function (JS function)
+function inputChangeHandler(identifier, value){
+    if(identifier === "title"){
+        setEnteredTitle(value);
+    }else if(identifier === "amount"){
+        setEnteredAmount(value);
+    }else if(identifier === "date"){
+        setEnteredDate(value);
+    }
+}
+
+// inside the JSX code...
+<input type="text" onChange={(event) => inputChangeHandler("title", event.target.value) }/>
+<input type="number" onChange={(event) => inputChangeHandler("amount", event.target.value) } min="0.01" step="0.01"/>
+<input type="date" onChange={(event) => inputChangeHandler("date", event.target.value) } min="2019-01-01" max="2022-12-31"/>
+```
+
+
