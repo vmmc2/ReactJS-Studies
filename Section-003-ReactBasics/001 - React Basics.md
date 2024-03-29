@@ -108,6 +108,26 @@ function ExpenseItem(){
 export default ExpenseItem;
 ```
 
+## React Project & 'The Building Process'
+* The building process of a React project consists of the few following steps:
+    1. __React Code:__ This consists of the React code you wrote and tested in your code editor.
+    2. __Build Process:__ The build process will take your React project code and will apply a few things to it:
+        * Changes and optimizes your code.
+        * Transforms your code in such way that it runs in the browser.
+        * Also, (potentially) optimizes other assets like CSS and image files (static files).
+    3. __Deployable Files:__ A collection of generated files that include our optimized code and any other extra assets (example: CSS code files, optimized images, etc).
+
+## Importing Images in a React project
+* Usually, in a pure HTML code you would load an image from your assets folder by using the ```src``` attribute of the ```<img/>``` tag.
+```html
+<img src="./assets/images/some-image.png" alt="Here goes the description of the loaded image."/>
+```
+* However, in a React project, this is not the correct approach. This happens due to the fact that, when deploying your project, the path to the image could change and then you wouldn't be able to load it.
+```jsx
+import reactImg from "./assets/images/some-image.png";
+
+<img src={reactImg} alt="Here goes the description of the loaded image."/>
+```
 
 ## Passing Data and Props
 * Right now, our custom React components are not reusable. I mean, nothing is stopping us from spamming several ```<ExpenseItem></ExpenseItem>``` elements inside the ```App.js``` file.
