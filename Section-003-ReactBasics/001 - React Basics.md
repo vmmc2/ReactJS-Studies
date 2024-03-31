@@ -108,6 +108,7 @@ function ExpenseItem(){
 export default ExpenseItem;
 ```
 
+
 ## React Project & 'The Building Process'
 * The building process of a React project consists of the few following steps:
     1. __React Code:__ This consists of the React code you wrote and tested in your code editor.
@@ -129,9 +130,18 @@ import reactImg from "./assets/images/some-image.png";
 <img src={reactImg} alt="Here goes the description of the loaded image."/>
 ```
 
+
+## Components can be potentially reused in React
+* This means that just because you can reuse a React component, it doesn't mean that you need to reuse such component.
+* __In short: reusability is an option, not a norm or a rule.__
+* To reforce this concept of reusability in React components, React provides a concept called __props__.
+* Such concept of __props__ allows us to pass data into components.
+* __You can think about it in other manners, such as: You are passing arguments (props) to a function (component), and inside the component you will use such props (arguments) to render something that is specific to a certain instance of the component (function).__
+
+
 ## Passing Data and Props
 * Right now, our custom React components are not reusable. I mean, nothing is stopping us from spamming several ```<ExpenseItem></ExpenseItem>``` elements inside the ```App.js``` file.
-* But remember, a React component is just a JavaScript function. We can obtain more flexibility and reusability by passing parameters to the React component (JavaScript function).
+* But remember, a React component is just a JavaScript function. __We can obtain more flexibility and reusability by passing parameters to the React component (JavaScript function).__
 * __On top of that, we'll need to use a React concept called Props.__
 * __Props are just the "attributes" of your custom "HTML element" (React components).__ Props simply means properties. They will work as the properties of our React components.
 * __By using the props concept, the data will not be stored inside the React component. Instead, the React component will receive such data from the outside. One could also say that props allows us to pass data from one component to another.__
@@ -175,12 +185,78 @@ import reactImg from "./assets/images/some-image.png";
         );
     }
     ```
-* Basically, as we can see above, we can pass different values to a React component by using a key-value approach, in which the keys are "attributes" and the values are the "values" related to the said attributes. All of these key-value pairs are put inside a JS object, which is passed as a parameter to the React component (JavaScript function). By convention, such parameter is named __```props```.__
+* __Basically, as we can see above, we can pass different values to a React component by using a key-value approach, in which the keys are "attributes" and the values are the "values" related to the said attributes.__ All of these key-value pairs are put inside a JS object (this is done by React, behind the scenes), which is passed as a parameter to the React component (JavaScript function). By convention, such parameter is named __```props```.__
 * Props can handle not only dynamic data but also hardcoded data.
 
 
+## Alternate Prop Syntaxes
+* Here we'll show how to deal with different prox syntaxes that React provides to us.
+* Let's take a look at the different options, one by one:
+
+#### Shorter syntax with the Spread (```...```) operator
+* Suppose you have a React component called ```CoreConcept```. Such React component has 3 attributes (props): ```title```, ```description``` and ```image```.
+* If you want to make an instance of such component, you would need to write the following:
+```jsx
+<CoreConcept
+    title={coreConcepts[0].title}
+    description={coreConcepts[0].description}
+    image={coreConcepts[0].image}
+/>
+```
+* __The syntax above is the standard syntax in React to deal with the passing of props to a React component.__
+* However, there are better ways of doing this.
+* __For example, if you are certain that the name of the props that you are using inside the component (function) implementation, you can simply pass the whole object as a prop, with the use of the spread operator and React will automatically bind the key-value pairs you are passing in, to the key-value pairs that you implemented inside the component (function).__
+* Therefore, the code below would be written as follows:
+```jsx
+<CoreConcept {...coreConcepts[0]} />
+```
+
+#### Shorter syntax with object destructuring
+* We can make the React component syntax even shorter. But now, we'll approach things on the side of the React component implementation.
+* Instead of receiving only one parameter in the React component, we can use object destructuring to perform an implicit assignment of the key-value pairs received to the variables used in the destructuring:
+```jsx
+function CoreConcept({title, description, image}){ // This is an example of object destructuring that makes the React component code shorter.
+    return (
+        <li>
+            <img src={image} alt={title}/>
+            <h3> {title} </h3>
+            <p> {description} </p>
+        </li>
+    );
+}
+```
+
+## Default prop values
+* There are certain scenarios where you are going to build components that may receive an optional prop.
+* For example, suppose that you are implementing a ```CustomButton``` component that may (or may not) receive a ```type``` prop.
+* Therefore, we should be able to call ```CustomButton``` with or without such prop, as the examples below show:
+```jsx
+<CustomButton type="submit" caption="My Button"/>
+
+<CustomButton caption="My Button"/>
+```
+* To make such a thing work, you need to set a default parameter inside the implementation (function) that corresponds to such component, as shown below:
+```jsx
+export default function CustomButton({ caption, type = "submit" }) { 
+    // caption has no default value, type has a default value of "submit"
+}
+```
+
+## Storing React components inside different JSX files
+* First of all, create a ```components``` folder inside the ```src``` folder.
+* The rule of thumb when creating new React components is the following: __One React component per JSX file.__
+* If your project becomes to complex, then it might be a good idea to take a look into other ways of structuring your React components, such as the __atom, molecule, organism__ approach.
+
+
+## Storing style component files next to component files
+* Currently, we are using plain CSS to style our React components.
+* When doing this, the rule of thumb is to not use a single ```.css``` file to store all styles of all components. Instead, one should use different ```.css``` files to write the styles related to a React component.
+* Moreover, such ```.css``` files should be stored inside the ```components``` folder, right next to the ```.jsx``` files (where each of these files represent a React component).
+
+
 ## Separating Logic from JSX
-* __It's considered a best practice to separate the "normal" logic JS code from the JSX code inside a React component. In other words, we shouldn't put complex expressions inside the ```{}``` of a JSX code snippet.__
+* __It's considered a best practice to separate the "normal" logic JS code from the JSX code inside a React component.__
+* __In other words, we shouldn't put complex expressions inside the ```{}``` of a JSX code snippet.__
 
 
 ## Splitting Components into Multiple Components
