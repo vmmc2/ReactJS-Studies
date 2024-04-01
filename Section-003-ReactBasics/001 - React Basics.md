@@ -307,6 +307,7 @@ export function TabButton(props){
 * __YOU DO NOT NEED TO PASS ONLY TEXT. THIS SPECIAL PROPS IS SO POWERFUL THAT ALLOWS YOU TO PASS COMPLEX JSX STRUCTURES INSIDE IT. THEREFORE, IT ALLOWS YOU WORK WITH COMPONENT COMPOSITION IN AN APPROPRIATE WAY.__
 * __In short, these two approaches work just fine. The question is: When we should use one over the other? The answer: It depends on the scenario and on your personal preference.__
 
+
 ## A Closer Look at JSX
 * As we've already discussed, JSX is basically just syntatic sugar.
 * This means that, behind the scenes, several transformations are performed over this JSX code. This is done in order to make the code viable to be executed inside different versions of different web browsers.
