@@ -246,12 +246,21 @@ export default function CustomButton({ caption, type = "submit" }) {
 * First of all, create a ```components``` folder inside the ```src``` folder.
 * The rule of thumb when creating new React components is the following: __One React component per JSX file.__
 * If your project becomes to complex, then it might be a good idea to take a look into other ways of structuring your React components, such as the __atom, molecule, organism__ approach.
+* __Another important thing to keep in mind is the fact that React does not automatically apply the styles inside a ```.css``` file. You have to do this manually.
+* The way to do such a thing is by importing the ```.css``` file, similarly to what we do with common ```.js``` files:
+```jsx
+// Inside the "Header.jsx" file, which implements the "Header" React component.
+
+import "./Header.css";
+```
+* __IMPORTANT: In React, this approach of dealing with ```.css``` files is implemented behind the scenes in such a way that the styles are not scoped (restricted) to the component. In short, you can essentially use such styles anywhere inside your application.__
 
 
 ## Storing style component files next to component files
 * Currently, we are using plain CSS to style our React components.
 * When doing this, the rule of thumb is to not use a single ```.css``` file to store all styles of all components. Instead, one should use different ```.css``` files to write the styles related to a React component.
 * Moreover, such ```.css``` files should be stored inside the ```components``` folder, right next to the ```.jsx``` files (where each of these files represent a React component).
+* __Important: It's often a good idea to create folders for each component that you implement. Such component folder would store the ```.jsx``` file that implements the component itself, the ```.css``` file that has the styles related to the component and any other files related to the particular component in question.__
 
 
 ## Separating Logic from JSX
@@ -265,10 +274,38 @@ export default function CustomButton({ caption, type = "submit" }) {
 * In the example project of this section, the instructor recomends that we split the ```ExpenseItem``` component into two components: A ```ExpenseItem``` components with less code and a brand new ```ExpenseDate``` component.
 
 
-## The Concept of Composition ("Children Props")
+## Component Composition ("Children Props")
 * Composition is an approach of building user interfaces that uses "building blocks" in order to create a complex UI.
+* Some HTML built-in elements trivia:
+    * First of all, it's a good idea to separate different sections of a webpage by using the ```<section></section>``` tag. 
+    * Second, if you want to implement a list of buttons (like a sequence of tab buttons), then it might be a very good idea to use the ```<menu></menu>``` built-in element combined with several ```<li><button></button></li>``` tags.
 * A very important concept that one almost always will need to apply is the one of __wrapper components + "children" props.__
+* This concept is very useful in the following scenario: Suppose that I have a component that implements a button that works like a tab. Moreover, suppose that I want such a custom component to work like a built-in ```<button></button>``` HTML element (in the way that I could add something between the opening and the closing tag in order to define a label/name to appear inside the button).
+* How can I achieve the behavior shown in the code snippet below in React?
+```jsx
+import TabButton from './TabButton.jsx';
 
+// ...
+
+<TabButton> Component </TabButton>
+```
+* To achieve such a thing, you need to use the default __"children" props__.
+* This is a special props, managed by React itself.
+* __Every React component receives this specific prop inside the ```props``` parameter.__
+* __To pass a value to the specific ```children``` prop of a component, we don't use the attribute syntax that we were using previously.__
+* __Instead, we pass the value directly between the opening and the closing tags of the custom React component that was implemented.__
+* __In terms of code/implementation, the React component would be implemented as follows:__
+```jsx
+export function TabButton(props){
+    return(
+        <li>
+            <button> {props.children} </button>
+        </li>
+    );
+}
+```
+* __YOU DO NOT NEED TO PASS ONLY TEXT. THIS SPECIAL PROPS IS SO POWERFUL THAT ALLOWS YOU TO PASS COMPLEX JSX STRUCTURES INSIDE IT. THEREFORE, IT ALLOWS YOU WORK WITH COMPONENT COMPOSITION IN AN APPROPRIATE WAY.__
+* __In short, these two approaches work just fine. The question is: When we should use one over the other? The answer: It depends on the scenario and on your personal preference.__
 
 ## A Closer Look at JSX
 * As we've already discussed, JSX is basically just syntatic sugar.
