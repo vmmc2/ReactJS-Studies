@@ -35,15 +35,40 @@ export function TabButton(props){
 * __Code Convention #2: These functions that will handle events related to the functionalities of React components are usually defined inside the component itself. The advantage of doing so resides in the fact that they will have access to the component's props and state.__
 
 
+## Dynamic Content and Passing Functions as Values to Props
+* It's a very common practice to pass forward functions (as props) that are going to deal with events.
+* Why do we do this? Because we want to react to a certain event inside the same component where we'll do some kind of update.
+
+
+## Passing Custom Arguments to Event Functions
+* In the scenario mentioned in the subsection above, you might want to show (or change) a certain content based on the button that it was pressed. __More specifically, based on the label (the name inside the button).__
+* How do we do that? We need to find a way to pass an argument to the function that is being assigned to the ```onClick``` prop of a React component, for example. But how do we do that if we cannot call the function when assigning it to a prop? __The idea is to wrap a function call passing a specific argument in an anonymous function.__
+* The code snippet below will show how we can do this:
+```jsx
+//...
+function handleSelect(selectedButton){
+    console.log(selectedButton);
+    return;
+}
+//...
+<menu>
+    <TabButton onSelect={() => handleSelect("components")}> Components </TabButton>
+    <TabButton onSelect={() => handleSelect("jsx")}> JSX </TabButton>
+    <TabButton onSelect={() => handleSelect("props")}> Props </TabButton>
+    <TabButton onSelect={() => handleSelect("state")}> State </TabButton>
+</menu>
+```
+
+
 ## How React parses, considers and brings JSX code to the screen
 * Remember, a React component is just a JavaScript function.
 * However, a React component is a function with a specific characteristic. __It returns JSX code.__
 * __IMPORTANT: But now, we need to question ourselves... Who is calling the React component (which, in the end, is just a JavaScript function)? Basically, we just use them as HTML elements inside the JSX code. However, it turns out that, by doing so, we are almost making a function call (behind the scenes).__
-* In fact, when a web page is visited, React is responsible for rendering the content that will be displayed on the screen. To do that, React will create a DOM made of custom components and default HTML elements. The start of creating such DOM is very similar to the one of traversing a tree by its depth. The starting point is the ```index.js``` file because that is the place that starts the rendering process. In our particular case, the rendering process starts with the custom component ```<App />```. When React arrives at this component, it automatically calls the React Component (JS function). It will then execute such function and when it reaches the ```return``` statement followed by JSX code it will traverse such code in a depth-first style until it finds another custom React component. Think of it like it's a execution of the depth-first search algorithm. __However, one must keep in mind that this process of rendering only happens once: when the webpage is visited and the DOM is rendered. It doesn't happen automatically after that.__
-* __If we want to "force" an update on the DOM rendered by React, then we need to make React aware that something changed inside a React component.__
+* In fact, when a web page is visited, React is responsible for rendering the content that will be displayed on the screen. To do that, React will create a DOM made of custom components and default HTML elements. The start of creating such DOM is very similar to the one of traversing a tree by its depth. The starting point is the ```index.js``` file because that is the place that starts the rendering process. In our particular case, the rendering process starts with the custom component ```<App />```. When React arrives at this component, it automatically calls the React Component (JS function). It will then execute such function and when it reaches the ```return``` statement followed by JSX code it will traverse such code in a depth-first style until it finds default HTML component. Think of it like it's a execution of the depth-first search algorithm. __However, one must keep in mind that this process of rendering only happens once: when the webpage is visited and the DOM is rendered. It doesn't happen automatically after that.__
 
 
-## Dynamic Content and Passing Functions as Values to Props
+## A Side Note about Rendering in React (And also an intro to State)
+* __If we want to "force" an update on the DOM rendered by React, then we need to make React aware that something changed inside a React component present inside the virtual/react DOM.__
 
 
 ## State
