@@ -63,8 +63,22 @@ function handleSelect(selectedButton){
 ## How React parses, considers and brings JSX code to the screen
 * Remember, a React component is just a JavaScript function.
 * However, a React component is a function with a specific characteristic. __It returns JSX code.__
-* __IMPORTANT: But now, we need to question ourselves... Who is calling the React component (which, in the end, is just a JavaScript function)? Basically, we just use them as HTML elements inside the JSX code. However, it turns out that, by doing so, we are almost making a function call (behind the scenes).__
-* In fact, when a web page is visited, React is responsible for rendering the content that will be displayed on the screen. To do that, React will create a DOM made of custom components and default HTML elements. The start of creating such DOM is very similar to the one of traversing a tree by its depth. The starting point is the ```index.js``` file because that is the place that starts the rendering process. In our particular case, the rendering process starts with the custom component ```<App />```. When React arrives at this component, it automatically calls the React Component (JS function). It will then execute such function and when it reaches the ```return``` statement followed by JSX code it will traverse such code in a depth-first style until it finds default HTML component. Think of it like it's a execution of the depth-first search algorithm. __However, one must keep in mind that this process of rendering only happens once: when the webpage is visited and the DOM is rendered. It doesn't happen automatically after that.__
+* __IMPORTANT: But now, we need to question ourselves... Who is calling the React component (which, in the end, is just a JavaScript function)? Basically, we just use them as HTML elements inside the JSX code. However, it turns out that, by doing so, we are making a function call (behind the scenes).__
+* In fact, when a web page is visited, React is responsible for rendering the content that will be displayed on the screen.
+* __To do that, React will create a DOM made of custom components and default HTML elements. The start of creating such DOM is very similar to the one of traversing a tree by its depth. The starting point is the ```index.js``` file because that is the place that starts the rendering process. In our particular case, the rendering process starts with the custom component ```<App />```. When React arrives at this component, it automatically calls the React Component (JS function). It will then execute such function and when it reaches the ```return``` statement followed by JSX code it will traverse such code in a depth-first style until it finds default HTML component.__
+* Think of it like it's a execution of the depth-first search algorithm. 
+* __However, one must keep in mind that this process of rendering only happens once: when the webpage is visited and the DOM is rendered. It doesn't happen automatically after that.__
+
+
+## Important Note about the first time a webpage is rendered using React
+* By default, the React components (JS functions) are executed just once __(when the page is rendered by the first time).__
+* __If you want a React component to be executed again (which normally happens when there is a state update), then you need to 'tell' React to do so.__
+
+
+## How React checks if UI updates are needed?
+* Basically, React compares the old output ('old JSX code') of your component function with the new output ('new JSX code') and applies any differences to the actual website UI.
+* Differences are spotted by React framework when a state update occurs.
+* When differences are spotted, updates will be applied to the real DOM, ensuring that the visible UI matches the expected output.
 
 
 ## A Side Note about Rendering in React (And also an intro to State)
