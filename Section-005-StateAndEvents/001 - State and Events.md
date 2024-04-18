@@ -139,6 +139,38 @@ function ExpenseItem(props){
 * __State and Events is what add reactivity to our React applications.__
 
 
+## Conditional Rendering in React
+* Conditional rendering is a situation that you'll find yourself in several times while working with React.
+* Essentially, what conditional rendering means is that, under certains conditions, you will display some components while hiding others at the same time.
+* How can we implement conditional rendering with React? There are a few approaches to do so. Thus, let's see each one of them as shown below:
+    1. __Using the ternary operator:__
+    ```JSX
+    {!selectedTopic ? <p> Please, select a topic. </p> : null}
+    {selectedTopic ? (
+        <div id="tab-content">
+            <h2> {EXAMPLES[selectedTopic].title} </h2>
+            <p> {EXAMPLES[selectedTopic].description} </p>
+            <pre>
+                <code> {EXAMPLES[selectedTopic].code} </code>
+            </pre>
+        </div>
+    ) : null}
+    ```
+    2. __Using the ampersand operator (&&): In JSX, if the first operand (left operand) of the logical AND operator is truthy, then the second one will be rendered. Thus, the code above can be rewritten as shown below:
+    ```JSX
+    {!selectedTopic && <p> Please, select a topic. </p>}
+    {selectedTopic && (
+        <div id="tab-content">
+            <h2> {EXAMPLES[selectedTopic].title} </h2>
+            <p> {EXAMPLES[selectedTopic].description} </p>
+            <pre>
+                <code> {EXAMPLES[selectedTopic].code} </code>
+            </pre>
+        </div>
+    )}
+    ```
+
+
 ## State can be updated in many ways
 * Up to now, we've only seen a single way of updating state. That is: through user actions (a button click, for example).
 * However, there are other ways of updating state in React. For example, we can update a state upon a HTTP request (i.e., the state changes based on the HTTP response that was received). Another example is, we can update a state because a timer (set with ```setTimeout``` function) expired.
