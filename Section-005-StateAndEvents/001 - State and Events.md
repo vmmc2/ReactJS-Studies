@@ -156,7 +156,7 @@ function ExpenseItem(props){
         </div>
     ) : null}
     ```
-    2. __Using the ampersand operator (&&): In JSX, if the first operand (left operand) of the logical AND operator is truthy, then the second one will be rendered. Thus, the code above can be rewritten as shown below:
+    2. __Using the ampersand operator (&&): In JSX, if the first operand (left operand) of the logical AND operator is truthy, then the second one will be rendered. Thus, the code above can be rewritten as shown below:__
     ```JSX
     {!selectedTopic && <p> Please, select a topic. </p>}
     {selectedTopic && (
@@ -169,6 +169,34 @@ function ExpenseItem(props){
         </div>
     )}
     ```
+
+
+## CSS Styling and Dynamic Styling
+* __In React, if you want to set up a CSS class to a certain HTML element such as ```<button></button>```, you need to use the ```className``` attribute, instead of the ```class``` attribute.__
+* Take a look at the code snippet below:
+```jsx
+<button className="active" onClick={()=>{ console.log("Pressed")}}> Button Name </button>
+```
+* __If you need to style a component conditionally, then the best approach to do so is through the use of a ternary operator along with the addition of props to the targeted component in question.__
+
+
+## Outputting List Data Dinamically
+* First of all, it's important to mention that React allows us to display list data.
+* For example, the following JSX code snippet below is valid and will output the values inside the list:
+```jsx
+{["Obi-Wan Kenobi", "Anakin Skywalker", "Ahsoka Tano"]}
+```
+* __It can be an array with any kind of values.__
+* __IMPORTANT: In other words, JSX is capable of dealing with arrays of renderable data (JSX elements).__
+* __BEST PRACTICE: Use the array of data (non-renderable objects) and transform it using the ```map``` method to produce a new array where each object is a renderable object that can be put on the screen by JSX.__
+```jsx
+<section id="core-concepts">
+    <h2> Core Concepts </h2>
+    <ul>
+        {CORE_CONCEPTS.map((conceptItem => (<CoreConcept key={conceptItem.title} {...conceptItem} /> )))}
+    </ul>
+</section>
+```
 
 
 ## State can be updated in many ways
