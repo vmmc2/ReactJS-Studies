@@ -141,3 +141,29 @@
     );
   }
   ```
+
+## Setting Component Types Dynamically
+* Imagine the following scenario: You have a custom component that you have implemented in React. Such component is returning a few elements. However, you want to choose the wrapper element that will store such few elements.
+* How can you dynamically pass such wrapper element when instantiating this React component?
+  * The answer to this is: __Simply use a prop to pass which kind of element you want to be used as the wrapper.__ However, one must learn how to pass the element as a prop. __The rule to do such a thing is the following: If the element you want to use is a default, built-in HTML element, you just pass its name as a string to the value of the prop. If the element you want to use is a custom React component, then you pass its name between {}.__
+  * Take a look at the example below:
+  ```jsx
+  export default function Tabs({ children, buttons, buttonsContainer}){
+    const ButtonsContainer = buttonsContainer;
+
+    return (
+      <>
+        <ButtonsContainer>{buttons}</ButtonsContainer>
+        {children}
+      </>
+    );
+  }
+  ```
+  * Now, this raises another question: How do we pass such prop to the React component when instantiating it?
+  ```jsx
+  //...
+  <Tabs buttonContainer="div" className="some-class" id="some-id"> // If the wrapper is a built-in HTML element, we pass its name as a string. If it's a custom React component, we pass it as a value, like: {CustomReactComponent}.
+    // Children props of "Tabs" custom component
+  </Tabs>
+  //...
+  ```
