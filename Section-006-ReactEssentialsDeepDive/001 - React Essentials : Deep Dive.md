@@ -63,7 +63,7 @@
   ```jsx
   //...
   return (
-    <Section id="examples">
+    <Section title="someTitle" id="examples">
       //...
     </Section>
     //...
@@ -74,7 +74,7 @@
   ```jsx
   export default function Section({ title, id, children }){
     return(
-      <section id={id}>
+      <section id={id}> // This approach solve the problem, but as the project grows, it leads to a very verbose code.
         <h2> {title} </h2>
         {children}
       </section>
@@ -82,3 +82,62 @@
   }
   ```
 * The ```id``` prop that we have set to the ```Section``` component is not forwarded to the its inner components.
+
+## Forwarding props to wrapped components/elements
+* Given the problem presented in the previous subsection of this doc, here is the solution to solve it: We are going to use the rest and spread operator to solve it for us. Below, you'll find code snippets that explain how this can be achieved:
+  * File #1: ```App.jsx```
+  ```jsx
+  //...
+  return (
+    <Section title="someTitle" id="examples" className="examples">
+      //...
+    </Section>
+    //...
+  );
+  //...
+  ```
+  * File #2: ```Section.jsx```
+  ```jsx
+  export default function Section({ title, children, ...props }){ // Here we are using the rest operator to group into an object (called 'props') all props that are not named 'title' or 'children'.
+    return(
+      <section {...props}> // Here, we are using the spread operator to forward all props that we received from outside to this section element (in our case, such props are 'id' and 'className').
+        <h2> {title} </h2>
+        {children}
+      </section>
+    );
+  }
+  ```
+
+## Working with multiple JSX slots
+* This scenario happens a lot when we are dealing with tab buttons because such components usually appears a lot inside an application.
+* If you think about it for a second, you'll realize that such tab buttons can be grouped into a tab component that has theses buttons and also a section below them where the content related to each button is presented in the screen.
+* There is a pattern that allows us to perform such a thing, even though it's not a common one. Take a look at the examples below:
+  * File #1: ```Examples.jsx```
+  ```jsx
+  export default function Examples(){
+    // ...
+    return (
+      <Tabs buttons={
+        <>
+          <TabButton isSelected={selectedTopic === "components"} onClick={() => {handleSelect("components")}}> Components </TabButton>
+          <TabButton isSelected={selectedTopic === "JSX"} onClick={() => {handleSelect("JSX")}}> JSX </TabButton>
+          <TabButton isSelected={selectedTopic === "State"} onClick={() => {handleSelect("State")}}> State </TabButton>
+          //...
+        </>
+      }>
+      // Children props...
+      </Tabs>
+    );
+  }
+  ```
+  * File #2: ```Tabs.jsx```
+  ```jsx
+  export default function Tabs({ children, buttons }){ // Both of these parameters (props) will receive JSX code as their values (In the end, JSX is just a value).
+    return (
+      <>
+        <menu>{buttons}</menu>
+        {children}
+      </>
+    );
+  }
+  ```
