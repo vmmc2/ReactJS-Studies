@@ -44,3 +44,41 @@
     );
   }
   ```
+
+## When you should split components?
+* In a React project, you dont't want to have a component that has multiple responsabilities. By responsabilities, I mean:
+  * Rendering a lot of different subcomponents inside it that are not related.
+  * Managing the state of different subcomponents that are also inside it.
+* When you notice situations like this in your project, then you have a great signal that it's time to refactor your project and split these big and complex components into smaller ones.
+
+## Splitting components by feature and state
+* First of all, it's considered a good idea and pattern to split a big component that has a lot of features, into smaller ones that represent a single feature. You can think of a features as being a "section" rendered in the screen.
+* It's also important to mentio that when performing such refactor, it's also essential to see what are the dependencies for each of these components (by dependencies, I mean external functions, data, packages, etc).
+* It's also a good idea to perform such refactor/splitting to avoid scenarions where componenets that should not be re-rendered are re-rendered. Such thing happens when there is a state update.
+
+## Props are not forwarded to inner elements
+* As the title already suggests to us, in React there is no magic that automatically takes a the value of a certain prop passed to a component and applies it to the inner components.
+* It's better to explain such a thing with an example. Take a look at the code snippet shown below:
+  * File #1: ```App.jsx```
+  ```jsx
+  //...
+  return (
+    <Section id="examples">
+      //...
+    </Section>
+    //...
+  );
+  //...
+  ```
+  * File #2: ```Section.jsx```
+  ```jsx
+  export default function Section({ title, id, children }){
+    return(
+      <section id={id}>
+        <h2> {title} </h2>
+        {children}
+      </section>
+    );
+  }
+  ```
+* The ```id``` prop that we have set to the ```Section``` component is not forwarded to the its inner components.
