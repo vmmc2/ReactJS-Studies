@@ -177,3 +177,35 @@
 ## Components instances work in isolation
 * You can think of a component as a class and a component instance as an object/instance of a class. We think about it in this manner, because each component instance has its own individual state. That's why we say that component instances work in isolation.
 
+## Best Practice: Updating the state of a component based on its previous state:
+* When performing the update of a state inside a component, such that the new state is based on the previous state, we would normally do the following as shown in the code snippet below:
+```jsx
+import { useState } from "react";
+
+export default function Player({name, symbol}){
+  const [isEditing, setIsEditing] = useState(false);
+
+  function handleEditClick(){
+    setIsEditing(!isEditing); // Here is where the state update based on the previous state happens.
+  }
+  
+  return (
+    <li>
+      <span className="player">
+        {isEditing ? <input type="text" required value={name} /> : <span className="player-name"> {name} </span>}
+        <span className="player-symbol"> {symbol} </span>
+      </span>
+      <button onClick={handleEditClick}> {isEditing ? "Save" : "Edit"} </button>
+    </li>
+  );
+}
+```
+* __However, this is not the best practice recommended by React devs.__
+  * __If your new state value depends on your previous state, you should not update it directly like shown below:__
+  ```jsx
+  setIsEditing(!isEditing);
+  ```
+  * __Instead of passing the value attached to the previous state, it's better to pass a function (to your state updating function) that returns the updated state based on the previous state. The function will automatically be called by React and will receive the guaranteed latest state value:__
+  ```jsx
+  setIsEditing(wasEditing => !wasEditing);
+  ```
