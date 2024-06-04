@@ -214,3 +214,35 @@ export default function Player({name, symbol}){
   2. In most cases, those state updates of course still are executed __almost instantly.__
   3. Also, pay attention to the fact that, when you don't use the best practice approach, the used value to represent the previous state is not updated automatically if you use the update state function. Remember that React schedules such updates. Thus, the result might not be what we expect.
   4. The approch with a function always receives the latest component state as its parameter, so we don't face this problem of receiving unexpected results.
+
+## User Input and Two-Way Binding
+* __In React, nothing stops you from having more than one state to manage inside the same React component. You are free to manage as many states as you want.__
+* __React also does some magic for us in certain scenarios. For example, suppose that we want to perform updates on a state variable based on the value that the user enters in an ```<input />``` element. In order to that work in a proper way, we need to first set the ```onChange``` attribute of this element to point to a function inside the React component. Now is where React executes is magic trick. It will automatically take the event that triggered the ```onChange``` attribute and pass it as an argument to the function that such attribute points to.__
+* Therefore, the code snippet below works just fine, as explained above:
+```jsx
+import { useState } from "react";
+
+export default function Player({initialName, symbol}){
+  const [playerName, setPlayerName] = useState(initialName);
+  const [isEditing, setIsEditing] = useState(false);
+
+  function handleEditClick(){
+    setIsEditing((isEditing) => !isEditing); // Always working with the latest updated state of this component.
+  }
+
+  function handleTextChange(event){
+    setPlayerName(event.target.value); // This state update does not depend on a previous state. Thus, there's no need to pass a function to this state-update function.
+  }
+  
+  return (
+    <li>
+      <span className="player">
+        {isEditing ? <input type="text" required value={playerName} onChange={handleTextChange} /> : <span className="player-name"> {playerName} </span>}
+        <span className="player-symbol"> {symbol} </span>
+      </span>
+      <button onClick={handleEditClick}> {isEditing ? "Save" : "Edit"} </button>
+    </li>
+  );
+}
+```
+* Finally, we also have a pattern that we can apply to certain components called __two-way binding.__ Through this pattern we the component absorbs input data from the user and outputs such data to the user in the same component. We just have to use 2 functions (one to deal with input and another to deal with output).
