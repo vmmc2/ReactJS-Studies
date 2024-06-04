@@ -209,3 +209,8 @@ export default function Player({name, symbol}){
   ```jsx
   setIsEditing(wasEditing => !wasEditing);
   ```
+* __Why is it considered a best practice to pass a function to the state updating function of a React component?__
+  1. State updates are __not performed instantly__ but at some point in the future (when React has time for it). It usually takes 1 or 2 miliseconds to React perform the state update. In other words, React schedule the state update.
+  2. In most cases, those state updates of course still are executed __almost instantly.__
+  3. Also, pay attention to the fact that, when you don't use the best practice approach, the used value to represent the previous state is not updated automatically if you use the update state function. Remember that React schedules such updates. Thus, the result might not be what we expect.
+  4. The approch with a function always receives the latest component state as its parameter, so we don't face this problem of receiving unexpected results.
