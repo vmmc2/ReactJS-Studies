@@ -167,3 +167,13 @@
   </Tabs>
   //...
   ```
+
+## Not every content must go inside a React Component
+* It's a very important (and yet very simple thing): You don't need to put static HTML content inside a component. If necessary, you can straight up write plain HTML code directly inside the ```index.html``` file from your project (the file that has the ```<div></div>``` with the ```id="root"```). 
+
+## When to create a React Component?
+* In a React project implementatio, whenever you find yourself writing repeated HTML content, then that's a good sign to create a separate React component to store that HTML content to avoid repetition. __Remember: DRY.__
+
+## Components instances work in isolation
+* You can think of a component as a class and a component instance as an object/instance of a class. We think about it in this manner, because each component instance has its own individual state. That's why we say that component instances work in isolation.
+
