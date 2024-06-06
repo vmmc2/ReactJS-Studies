@@ -299,3 +299,8 @@ export default function GameBoard(){
   * __In short, we have the following behavior:__
     * __The Ancestor Component manages the state (which is needed by Child Component #1 and Child Component #2).__
     * __Child Component #1 and Child Component #2 need the state (which is managed by the Ancestor Component).__
+
+  ## Avoid Intersecting States
+  * In React, adding a new state to store kind of the same information (just with a little bit of extra data) is typically something that you, as a developer, want to avoid.
+  * This guideline is not always easy to follow. Moreover, it requires practice and also that you, as a developer, think about how your project is growing and how you want to scale it.
+  * Sometimes, to follow this guideline, you need to use the __lifting the state up__ strategy that was previously seen.
