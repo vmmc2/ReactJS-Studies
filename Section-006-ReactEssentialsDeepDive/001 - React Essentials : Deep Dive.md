@@ -246,3 +246,32 @@ export default function Player({initialName, symbol}){
 }
 ```
 * Finally, we also have a pattern that we can apply to certain components called __two-way binding.__ Through this pattern we the component absorbs input data from the user and outputs such data to the user in the same component. We just have to use 2 functions (one to deal with input and another to deal with output).
+
+## Rendering Multi-Dimensional Lists
+* When working with our Tic-Tac-Toe project, we need to iterate through multi-dimensional lists (arrays) in order to display/render the game board in the screen.
+* By using JSX code, we have an easy way of doing such a thing, as shown below:
+```jsx
+const initialGameBoard = [
+  [null, null, null],
+  [null, null, null],
+  [null, null, null],
+];
+
+export default function GameBoard(){
+  return (
+    <ol id="game-board">
+      {initialGameBoard.map((row, rowIndex) => (
+        <li key={rowIndex}>
+          <ol>
+            {row.map((playerSymbol, colIndex) => (
+              <li key={colIndex}>
+                <button> {playerSymbol} </button>
+              </li>
+            ))}
+          </ol>
+        </li>
+      ))}
+    </ol>
+  );
+}
+```
