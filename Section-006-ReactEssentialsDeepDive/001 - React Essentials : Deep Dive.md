@@ -275,3 +275,12 @@ export default function GameBoard(){
   );
 }
 ```
+
+## Best Practice: Updating Object State Immutably
+* __As we've seen that there are best practices when it comes to update the state of a component based on the previous state (use a function).__
+* __There are also best practices when updating the state of a component when the thing we are updating is an array or an object:__
+* __Such best practice is to update an array state or an object state immutably:__
+  * Objects and array are __reference values__ in JavaScript.
+  * __Thus, you should not mutate an array or an object directly. Instead, the best practice is to create a deep copy of the array or object first.__
+  * To do such a thing (create a deep copy), use the spread operator.
+  * If we didn't create the deep copy first, we would be updating the old value in-memory immediately even before the update scheduled by React was executed. This approach can lead to strange bugs and side-effects if we have multiple locations in our application that are changing/updating the same state.
