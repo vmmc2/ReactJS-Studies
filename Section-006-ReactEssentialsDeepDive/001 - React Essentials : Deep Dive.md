@@ -284,3 +284,18 @@ export default function GameBoard(){
   * __Thus, you should not mutate an array or an object directly. Instead, the best practice is to create a deep copy of the array or object first.__
   * To do such a thing (create a deep copy), use the spread operator.
   * If we didn't create the deep copy first, we would be updating the old value in-memory immediately even before the update scheduled by React was executed. This approach can lead to strange bugs and side-effects if we have multiple locations in our application that are changing/updating the same state.
+
+  ## Lifting The State Up
+  * In our Tic-Tac-Toe project, we need to make sure that the players take turns when playing the game. For example, Player #1 makes the first move (which will be represented by 'X'), then Player #2 makes its move (which will be represented by 'O'), and so on. Not only that, but we also want to highlight which player is currently making the move.
+  * In the way that we structured our project, this means that there are two different components (```Player``` and ```GameBoard```) that should have knowledge about certain information.
+  * To implement such a thing, we can use a strategy called __Lifting State Up.__
+  * __How does the "Lifting State Up" strategy work?__
+    * __This strategy works by lifting the state up to the closest ancestor component that has access to all components that need to work with that state.__
+    * __In the case of our Tic-Tac-Toe project, we need to lift the state up to the ```App``` component since it's the one that has access to both the ```Player``` component and the ```GameBoard``` component.__
+    * __The information that these child components need can be passed to them via props from the closest ancestor component.__
+  * Other things that are features of the __```lifting the state up```__ strategy:
+    * The ancestor component passes the state value via props to the child component.
+    * The ancestor component passes a function that eventually changes the state via props to the child component. This allows the child component to initiate the state change.
+  * __In short, we have the following behavior:__
+    * __The Ancestor Component manages the state (which is needed by Child Component #1 and Child Component #2).__
+    * __Child Component #1 and Child Component #2 need the state (which is managed by the Ancestor Component).__
